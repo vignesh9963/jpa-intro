@@ -5,7 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 
-//using jpa provider
+//using jpa configurations
 public class App1 {
 
     public static void main( String[] args )

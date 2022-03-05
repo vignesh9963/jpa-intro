@@ -6,7 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 
-
+//using Hibernate Configuration
 
 public class App {
 
