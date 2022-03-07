@@ -5,10 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-//Performing Update Operations
-
-
-public class App8 {
+public class App9 {
 
     public static void main( String[] args )
     {
@@ -20,7 +17,7 @@ public class App8 {
 
             entityManager.getTransaction().begin();
 
-            Employee5 firstEmployee = new Employee5("Peter1", "Holland",
+            Employee5 firstEmployee = new Employee5("Peter", "Holland",
                     "Manager", 120000d);
 
             Employee5 secondEmployee = new Employee5("Bruce", "Brenner",
@@ -34,16 +31,17 @@ public class App8 {
             entityManager.persist(thirdEmployee);
 
 
-            List<Employee5> employeeList = entityManager
-                    .createQuery("SELECT ed FROM Employee5 ed")
-                    .getResultList();
+            Employee5 empThree = entityManager.find(Employee5.class, 3);
 
             System.out.println("\n****************************\n");
-            System.out.println("The employees in the EmployeeDetails table:");
-            for(Employee5 emp: employeeList){
-                System.out.println(emp);
-            }
-            System.out.println("\n****************************\5n");
+            System.out.println("Updating an employee's details:");
+
+            empThree.setJob("Senior Vice President");
+            empThree.setSalary(180000d);
+            entityManager.persist(empThree);
+
+            System.out.println("Details saved...");
+            System.out.println("\n****************************\n");
 
         }
         catch (Exception exception){
