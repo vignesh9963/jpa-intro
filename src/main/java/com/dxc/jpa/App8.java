@@ -3,11 +3,9 @@ package com.dxc.jpa;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.List;
 
-
-//Performing Read and Insert Operations
-
-public class App7 {
+public class App8 {
 
     public static void main( String[] args )
     {
@@ -19,7 +17,7 @@ public class App7 {
 
             entityManager.getTransaction().begin();
 
-            Employee5 firstEmployee = new Employee5("Peter", "Holland",
+            Employee5 firstEmployee = new Employee5("Peter1", "Holland",
                     "Manager", 120000d);
 
             Employee5 secondEmployee = new Employee5("Bruce", "Brenner",
@@ -32,16 +30,17 @@ public class App7 {
             entityManager.persist(secondEmployee);
             entityManager.persist(thirdEmployee);
 
-            //Read the data from database
-            Employee5 empOne = entityManager.find(Employee5.class, 1);
-            Employee5 empThree = entityManager.find(Employee5.class, 3);
+
+            List<Employee5> employeeList = entityManager
+                    .createQuery("SELECT ed FROM Employee5 ed")
+                    .getResultList();
 
             System.out.println("\n****************************\n");
-
-            System.out.println("Details of empOne: " + empOne);
-            System.out.println("Details of empThree: " + empThree);
-
-            System.out.println("\n****************************\n");
+            System.out.println("The employees in the EmployeeDetails table:");
+            for(Employee5 emp: employeeList){
+                System.out.println(emp);
+            }
+            System.out.println("\n****************************\5n");
 
         }
         catch (Exception exception){
