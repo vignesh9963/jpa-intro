@@ -16,10 +16,10 @@ public class App1 {
 
         entityManager.getTransaction().begin();
 
-        Employee1 firstEmployee1 = new Employee1(1123, "Rohit", "Sharma",
+        Employee1 firstEmployee1 = new Employee1(1890, "Rohit", "Sharma",
                 "Manager", 120000);
 
-        Employee1 secondEmployee1 = new Employee1(1143,"Mayank", "Agarwal",
+        Employee1 secondEmployee1 = new Employee1(1998,"Mayank", "Agarwal",
                 "Analyst", 90000);
 
         entityManager.persist(firstEmployee1);
