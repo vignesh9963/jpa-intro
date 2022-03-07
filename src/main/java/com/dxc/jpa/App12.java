@@ -6,9 +6,9 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 
-//Modelling One to One Relationships(Employee6 and EmployeeContactInfo)
+//Modeling One-to-many Relationships
 
-public class App11 {
+public class App12 {
 
     public static void main( String[] args )
     {
@@ -20,22 +20,32 @@ public class App11 {
 
             entityManager.getTransaction().begin();
 
-            EmployeeContactInfo eciOne = new EmployeeContactInfo("101 Main St", "555-101");
-            EmployeeContactInfo eciTwo = new EmployeeContactInfo("51 Broadway", "555-155");
-            EmployeeContactInfo eciThree = new EmployeeContactInfo("24 Walnut St", "555-222");
+            Department2 techDept = new Department2("Tech", "Floor 3");
+            Department2 researchDept = new Department2("Research", "Floor 5");
 
-            Employee6 firstEmployee = new Employee6("Peter", "Holland",
+            EmployeeContactInfo2 eciOne = new EmployeeContactInfo2("101 Main St", "555-101");
+            EmployeeContactInfo2 eciTwo = new EmployeeContactInfo2("51 Broadway", "555-155");
+            EmployeeContactInfo2 eciThree = new EmployeeContactInfo2("24 Walnut St", "555-222");
+
+            Employee7 firstEmployee = new Employee7("Peter", "Holland",
                     "Manager", 120000d);
 
-            Employee6 secondEmployee = new Employee6("Bruce", "Brenner",
+            Employee7 secondEmployee = new Employee7("Bruce", "Brenner",
                     "Analyst", 80000d);
 
-            Employee6 thirdEmployee = new Employee6("Naomi", "Miller",
+            Employee7 thirdEmployee = new Employee7("Naomi", "Miller",
                     "Vice President", 160000d);
 
             firstEmployee.setContactInfo(eciOne);
             secondEmployee.setContactInfo(eciTwo);
             thirdEmployee.setContactInfo(eciThree);
+
+            firstEmployee.setDepartment2(techDept);
+            secondEmployee.setDepartment2(techDept);
+            thirdEmployee.setDepartment2(researchDept);
+
+            entityManager.persist(techDept);
+            entityManager.persist(researchDept);
 
             entityManager.persist(firstEmployee);
             entityManager.persist(secondEmployee);
@@ -46,25 +56,36 @@ public class App11 {
             entityManager.persist(eciThree);
 
 
-            List<Employee6> employeeList = entityManager
-                    .createQuery("SELECT ed FROM Employee6 ed")
+            List<Employee7> employeeList = entityManager
+                    .createQuery("SELECT ed FROM Employee7 ed")
                     .getResultList();
 
             System.out.println("\n****************************\n");
             System.out.println("The employees in the Employee table:");
-            for(Employee6 emp: employeeList){
+            for(Employee7 emp: employeeList){
                 System.out.println(emp);
             }
 
             System.out.println("\n****************************\n");
 
-            List<EmployeeContactInfo> contactInfos = entityManager
-                    .createQuery("SELECT eci FROM EmployeeContactInfo eci")
+            List<EmployeeContactInfo2> contactInfos = entityManager
+                    .createQuery("SELECT eci FROM EmployeeContactInfo2 eci")
                     .getResultList();
 
             System.out.println("\nThe contact details for employees:\n");
-            for(EmployeeContactInfo eci: contactInfos){
+            for(EmployeeContactInfo2 eci: contactInfos){
                 System.out.println(eci);
+            }
+
+            System.out.println("\n****************************\n");
+
+            List<Department2> departments = entityManager
+                    .createQuery("SELECT dep FROM Department2 dep")
+                    .getResultList();
+
+            System.out.println("\nThe departments on record:\n");
+            for(Department2 dep: departments){
+                System.out.println(dep);
             }
 
             System.out.println("\n****************************\n");
