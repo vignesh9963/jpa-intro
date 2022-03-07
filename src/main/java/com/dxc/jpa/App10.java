@@ -5,7 +5,14 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class App9 {
+//app7-R
+//app8-C
+//app9-U
+//app10=D
+//Performing Delete Operations
+
+
+public class App10 {
 
     public static void main( String[] args )
     {
@@ -34,13 +41,11 @@ public class App9 {
             Employee5 empThree = entityManager.find(Employee5.class, 3);
 
             System.out.println("\n****************************\n");
-            System.out.println("Updating an employee's details:");
+            System.out.println("Deleting an employee:");
 
-            empThree.setJob("Senior Vice President");
-            empThree.setSalary(180000d);
-            entityManager.persist(empThree);
+            entityManager.remove(empThree);
 
-            System.out.println("Details saved...");
+            System.out.println("Employee removed...");
             System.out.println(empThree);
             System.out.println("\n****************************\n");
 
